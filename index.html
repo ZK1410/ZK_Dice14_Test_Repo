@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#0ea5e9" />
+        <meta name="description" content="A clean, responsive, and accessible test index page." />
+        <title>Test Website — Index</title>
+        <style>
+            :root {
+                --bg: #0b1220;
+                --bg-elev: #0f172a;
+                --text: #e5e7eb;
+                --muted: #94a3b8;
+                --surface: #111827;
+                --border: #243041;
+                --brand: #38bdf8;
+                --brand-contrast: #0b1220;
+                --ring: 0 0 0 4px rgba(56, 189, 248, 0.25);
+                --shadow: 0 10px 30px rgba(2, 8, 23, 0.4);
+                --radius: 14px;
+                --radius-sm: 10px;
+                --container: 1100px;
+            }
+            @media (prefers-color-scheme: light) {
+                html[data-theme="auto"] {
+                    --bg: #f7fafc;
+                    --bg-elev: #ffffff;
+                    --text: #0f172a;
+                    --muted: #475569;
+                    --surface: #ffffff;
+                    --border: #e2e8f0;
+                    --brand: #0ea5e9;
+                    --brand-contrast: #ffffff;
+                    --shadow: 0 12px 28px rgba(2, 8, 23, 0.12);
+                }
+            }
+            html[data-theme="light"] {
+                --bg: #f7fafc;
+                --bg-elev: #ffffff;
+                --text: #0f172a;
+                --muted: #475569;
+                --surface: #ffffff;
+                --border: #e2e8f0;
+                --brand: #0ea5e9;
+                --brand-contrast: #ffffff;
+                --shadow: 0 12px 28px rgba(2, 8, 23, 0.12);
+            }
+            html, body {
+                height: 100%;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+                color: var(--text);
+                background:
+                    radial-gradient(1200px 600px at 10% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
+                    radial-gradient(800px 500px at 110% 10%, rgba(14, 165, 233, 0.15), transparent 60%),
+                    linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            .container {
+                width: 100%;
+                max-width: var(--container);
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            .skip-link {
+                position: absolute;
+                left: -9999px;
+                top: auto;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+            }
+            .skip-link:focus {
+                left: 16px;
+                top: 16px;
+                width: auto;
+                height: auto;
+                background: var(--brand);
+                color: var(--brand-contrast);
+                padding: 10px 14px;
+                border-radius: 8px;
+                outline: none;
+                box-shadow: var(--ring);
+                z-index: 1000;
+            }
+            header {
+                position: sticky;
+                top: 0;
+                backdrop-filter: saturate(150%) blur(10px);
+                background: color-mix(in oklab, var(--bg), transparent 15%);
+                border-bottom: 1px solid var(--border);
+                z-index: 50;
+            }
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 14px 0;
+            }
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 800;
+                letter-spacing: 0.2px;
+            }
+            .brand-logo {
+                width: 32px;
+                height: 32px;
+                border-radius: 10px;
+                background: linear-gradient(135deg, var(--brand), #60a5fa);
+                box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 14px rgba(14, 165, 233, 0.35);
+            }
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 12px;
+                color: var(--muted);
+                padding: 6px 10px;
+                border: 1px solid var(--border);
+                border-radius: 999px;
+                background: color-mix(in oklab, var(--surface), transparent 8%);
+            }
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .btn, button {
+                appearance: none;
+                border: 0;
+                cursor: pointer;
+                font: inherit;
+            }
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 12px 16px;
+                border-radius: 12px;
+                transition: transform .08s ease, box-shadow .2s ease, opacity .2s ease, background .2s ease;
+                will-change: transform;
+                user-select: none;
+            }
+            .btn-primary {
+                background: linear-gradient(180deg, var(--brand), color-mix(in oklab, var(--brand), #000 10%));
+                color: var(--brand-contrast);
+                box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+            }
+            .btn-ghost {
+                background: color-mix(in oklab, var(--surface), transparent 8%);
+                border: 1px solid var(--border);
+                color: var(--text);
+            }
+            .btn:hover { transform: translateY(-1px); }
+            .btn:active { transform: translateY(0); }
+            .btn:focus-visible { outline: none; box-shadow: var(--ring); }
+            main {
+                display: grid;
+                gap: 56px;
+            }
+            .hero {
+                padding: 56px 0;
+            }
+            .hero-card {
+                display: grid;
+                gap: 22px;
+                padding: 28px;
+                border-radius: var(--radius);
+                border: 1px solid var(--border);
+                background:
+                    radial-gradient(500px 200px at 80% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+                    color-mix(in oklab, var(--surface), transparent 4%);
+                box-shadow: var(--shadow);
+            }
+            .headline {
+                display: grid;
+                gap: 14px;
+            }
+            h1 {
+                margin: 0;
+                font-size: clamp(28px, 4vw, 44px);
+                line-height: 1.12;
+                letter-spacing: -0.02em;
+            }
+            p.lead {
+                margin: 0;
+                color: var(--muted);
+                font-size: clamp(15px, 2.2vw, 18px);
+            }
+            .cta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 8px;
+            }
+            .grid {
+                display: grid;
+                gap: 18px;
+                grid-template-columns: repeat(12, 1fr);
+            }
+            .col-7 { grid-column: span 7; }
+            .col-5 { grid-column: span 5; }
+            @media (max-width: 900px) {
+                .col-7, .col-5 { grid-column: 1 / -1; }
+            }
+            .panel {
+                height: 100%;
+                padding: 18px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius-sm);
+                background: color-mix(in oklab, var(--surface), transparent 4%);
+            }
+            .features {
+                padding: 10px 0 24px;
+            }
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 16px;
+            }
+            .feature {
+                grid-column: span 3;
+                display: grid;
+                gap: 8px;
+                padding: 16px;
+                border-radius: 12px;
+                border: 1px solid var(--border);
+                background: color-mix(in oklab, var(--surface), transparent 6%);
+            }
+            .feature .icon {
+                width: 28px;
+                height: 28px;
+            }
+            .feature h3 {
+                margin: 0;
+                font-size: 16px;
+            }
+            .feature p {
+                margin: 0;
+                color: var(--muted);
+                font-size: 14px;
+            }
+            @media (max-width: 1000px) {
+                .feature { grid-column: span 6; }
+            }
+            @media (max-width: 640px) {
+                .feature { grid-column: 1 / -1; }
+            }
+            .demo {
+                padding: 0 0 44px;
+            }
+            .demo-card {
+                display: grid;
+                gap: 18px;
+            }
+            .die {
+                font-size: clamp(42px, 8vw, 68px);
+                line-height: 1;
+                text-align: center;
+                padding: 24px;
+                border-radius: var(--radius-sm);
+                border: 1px solid var(--border);
+                background: color-mix(in oklab, var(--surface), transparent 6%);
+                box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+            }
+            .die[aria-busy="true"] {
+                filter: saturate(140%);
+                transform: scale(1.02);
+                transition: transform .15s ease;
+            }
+            footer {
+                border-top: 1px solid var(--border);
+                margin-top: 20px;
+                background: color-mix(in oklab, var(--surface), transparent 4%);
+            }
+            .footer {
+                padding: 18px 0 30px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                color: var(--muted);
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header>
+            <div class="container nav" role="navigation" aria-label="Main">
+                <div class="brand">
+                    <div class="brand-logo" aria-hidden="true"></div>
+                    <span>Test Website</span>
+                    <span class="badge" title="This is a test page" aria-label="Test page">Test</span>
+                </div>
+                <div class="nav-actions">
+                    <button id="themeToggle" class="btn btn-ghost" type="button" aria-label="Toggle theme">
+                        <span aria-hidden="true">🌓</span>
+                        <span class="sr">Toggle theme</span>
+                    </button>
+                    <a class="btn btn-primary" href="#demo" role="button">Try Demo</a>
+                </div>
+            </div>
+        </header>
+
+        <main id="main" class="container" role="main">
+            <section class="hero">
+                <div class="hero-card">
+                    <div class="grid">
+                        <div class="col-7">
+                            <div class="headline">
+                                <h1>Welcome to your test index page</h1>
+                                <p class="lead">Clean, responsive, and accessible starter markup you can customize quickly.</p>
+                            </div>
+                            <div class="cta">
+                                <a class="btn btn-primary" href="#features">Explore features</a>
+                                <a class="btn btn-ghost" href="#demo">Run quick demo</a>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="panel" aria-label="Highlights">
+                                <ul style="margin:0;padding-left:18px;line-height:1.7;color:var(--muted)">
+                                    <li>No build tools or dependencies</li>
+                                    <li>Dark/light theme with one click</li>
+                                    <li>Semantic HTML and a11y friendly</li>
+                                    <li>Modern CSS with graceful fallbacks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="features" aria-labelledby="features-title">
+                <h2 id="features-title" style="margin:0 0 14px;font-size:20px">Features</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 12h16M4 12l5-5M4 12l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h3>Fast start</h3>
+                        <p>Drop-in file with zero setup.</p>
+                    </div>
+                    <div class="feature">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M9 18v2m6-2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <h3>Responsive</h3>
+                        <p>Looks good on any device.</p>
+                    </div>
+                    <div class="feature">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 3l7 4v5c0 5-3 7-7 9-4-2-7-4-7-9V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h3>Accessible</h3>
+                        <p>Semantic structure and focus styles.</p>
+                    </div>
+                    <div class="feature">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <h3>Minimal</h3>
+                        <p>Just HTML, CSS, and tiny JS.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demo" class="demo" aria-labelledby="demo-title">
+                <div class="demo-card">
+                    <h2 id="demo-title" style="margin:0 0 10px;font-size:20px">Quick demo: roll the die</h2>
+                    <div class="die" id="die" role="status" aria-live="polite" aria-atomic="true" aria-label="Die face">⚄</div>
+                    <div class="cta">
+                        <button id="roll" class="btn btn-primary" type="button" aria-label="Roll the die">Roll</button>
+                        <button id="reset" class="btn btn-ghost" type="button" aria-label="Reset the die">Reset</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container footer">
+                <span>&copy; <span id="year"></span> Test Website</span>
+                <span>Built with vanilla HTML, CSS, and JS.</span>
+            </div>
+        </footer>
+
+        <script>
+            // Theme toggle with localStorage and prefers-color-scheme
+            (function () {
+                const html = document.documentElement;
+                const key = "theme";
+                const toggle = document.getElementById("themeToggle");
+
+                function applyTheme(value) {
+                    if (value === "light" || value === "dark") {
+                        html.setAttribute("data-theme", value);
+                    } else {
+                        html.setAttribute("data-theme", "auto");
+                    }
+                }
+                function currentTheme() {
+                    const saved = localStorage.getItem(key);
+                    return saved || "auto";
+                }
+                function rotateTheme() {
+                    const order = ["auto", "light", "dark"];
+                    const next = order[(order.indexOf(currentTheme()) + 1) % order.length];
+                    localStorage.setItem(key, next);
+                    applyTheme(next);
+                    toggle.title = `Theme: ${next}`;
+                }
+
+                applyTheme(currentTheme());
+                if (toggle) {
+                    toggle.title = `Theme: ${currentTheme()}`;
+                    toggle.addEventListener("click", rotateTheme);
+                    toggle.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            rotateTheme();
+                        }
+                    });
+                }
+            })();
+
+            // Dice demo
+            (function () {
+                const die = document.getElementById("die");
+                const rollBtn = document.getElementById("roll");
+                const resetBtn = document.getElementById("reset");
+                const faces = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+
+                function roll() {
+                    die.setAttribute("aria-busy", "true");
+                    let ticks = 12;
+                    const spin = setInterval(() => {
+                        const r = Math.floor(Math.random() * 6);
+                        die.textContent = faces[r];
+                        if (--ticks <= 0) {
+                            clearInterval(spin);
+                            die.removeAttribute("aria-busy");
+                        }
+                    }, 60);
+                }
+                function reset() {
+                    die.textContent = "⚄";
+                }
+                rollBtn?.addEventListener("click", roll);
+                resetBtn?.addEventListener("click", reset);
+                // Keyboard accessibility
+                rollBtn?.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); roll(); } });
+                resetBtn?.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); reset(); } });
+
+                // Set current year
+                document.getElementById("year").textContent = new Date().getFullYear();
+            })();
+        </script>
+        <noscript>
+            This page works without JavaScript, but interactivity is limited.
+        </noscript>
+    </body>
+</html>
